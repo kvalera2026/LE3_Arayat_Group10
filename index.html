@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact List</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script>
+            var firstname = [];
+            var lastname = [];
+            var contacts = [];
+            var details = [];
+            function displayList() {
+                document.getElementById("fnList").innerHTML = "";
+                for(var a=0; a<firstname.length; a++) {
+                    document.getElementById("fnList").innerHTML += 'p' + firstname[a] + '</p>';
+                }
+            }
+            
+            function displayList() {
+                document.getElementById("lnList").innerHTML = "";
+                for(var b=0; b<lastname.length; b++) {
+                    document.getElementById("lnList").innerHTML += 'p' + lastname[b] + '</p>';
+                }
+            }
+
+            function displayList() {
+                document.getElementById("cList").innerHTML = "";
+                for(var c=0; c<contacts.length; c++) {
+                    document.getElementById("cList").innerHTML += 'p' + contacts[c] + '</p>';
+                }
+            }
+
+            function displayList() {
+                document.getElementById("dList").innerHTML = "";
+                for(var d=0; d<details.length; d++) {
+                    document.getElementById("dLIst").innerHTML += 'p' + details[d] + '</p>';
+                }
+            }
+
+            function addToList(item) {
+                firstname.push(item);
+                displayList();
+                localStorage.setItem("contacts",JSON.stringify(contacts));
+
+                lastname.push(item);
+                displayList();
+                localStorage.setItem("contacts",JSON.stringify(contacts));
+
+                contacts.push(item);
+                displayList();
+                localStorage.setItem("contacts",JSON.stringify(contacts));
+
+                details.push(item);
+                displayList();
+                localStorage.setItem("contacts",JSON.stringify(contacts));
+            }
+            function getItem() {
+                var a = document.getElementById("fn").value;
+                addToList(a);
+                var b = document.getElementById("ln").value;
+                addToList(b);
+                var c = document.getElementById("contact").value;
+                addToList(c);
+                var d = document.getElementById("details").value;
+                addToList(d);
+            }
+            function loadList() {
+                if(JSON.parse(localStorage.getItem('contacts') != null))
+                    favoriteThings = JSON.parse(localStorage.getItem('contacts'));
+                displayList();
+            }
+        </script>
+    </head>
+    <body class="container" onload="loadList">
+        <h3>Contact Number</h3>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="fn" placeholder="First Name">
+            <input type="text" class="form-control" id="ln" placeholder="Last Name">
+            <input type="text" class="form-control" id="contact" placeholder="Contact Number">
+            <input type="text" class="form-control" id="deatils" placeholder="Details ">
+        </div>
+        <button id="myBtn" class="btn btn-primary" onclick="getItem()">Add</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="col" id="fnList"></td>
+                    <td scope="col" id="lnList"></td>
+                    <td scope="col" id="cList"></td>
+                    <td scope="col" id="dList"></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
